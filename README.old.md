@@ -1,2 +1,0 @@
-# ethdenver
-ETH Denver
