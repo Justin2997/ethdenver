@@ -16,14 +16,33 @@ export default function Dashboard() {
     }
   }, []);
 
+  const userInfo = user.get();
   return (
     <React.Fragment>
       <div className="wrapper">
         <Header />
 
-        <div className="flex justify-center gap-12">
-          <div style={{ margin: "100px" }}>
-            <TransactionCard />
+        <div style={{ margin: "50px" }}>
+          <TransactionCard
+            chain="polygon"
+            address={userInfo[0]}
+            tokenSymbol="MATIC"
+            tokenDecimals={18}
+            tokenName="Matic"
+            tokenAmount={20.0}
+          />
+        </div>
+
+        <div className="justify-center gap-12">
+          <div style={{ margin: "50px" }}>
+            <TransactionCard
+              chain="ethereum"
+              address={userInfo[0]}
+              tokenSymbol="ETH"
+              tokenDecimals={18}
+              tokenName="Ethereum"
+              tokenAmount={0.01}
+            />
           </div>
         </div>
       </div>

@@ -8,9 +8,29 @@ export default function PrimaryView() {
       <div className="wrapper">
         <img
           src={logo}
-          alt="CryptoTacos"
-          style={{ width: "15%", position: "absolute", left: "47%" }}
+          alt="CryptoTaco"
+          style={{ width: "25%", margin: "auto" }}
         />
+        <h1
+          className="font-bold tracking-tight text-gray-900 dark:text-white"
+          style={{
+            fontSize: "6em",
+            textAlign: "center",
+          }}
+        >
+          CryptoTaco
+        </h1>
+        <p
+          className="font-bold tracking-tight text-gray-900 dark:text-white"
+          style={{
+            fontSize: "2em",
+            textAlign: "center",
+            marginBottom: "0.4em",
+            fontStyle: "italic",
+          }}
+        >
+          Remove ALL the friction to accept crypto
+        </p>
         <LoginWithMagic />
       </div>
     </React.Fragment>
