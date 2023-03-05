@@ -6,10 +6,12 @@ import { Button, Card, Modal } from "flowbite-react";
 import React, { useEffect } from "react";
 import { userState } from "store/userState";
 import alchemy from "utils/alchemy";
+import { web3 } from "utils/web3";
 
 export default function AccountCard() {
   const user = useHookstate(userState);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [currentBalance, setCurrentBalance] = React.useState("0");
 
   const userInfo = user.get();
   const url =
@@ -22,7 +24,13 @@ export default function AccountCard() {
   }, []);
 
   async function getUserBalance() {
-    alchemy.core.getTokenBalances(userInfo[0]).then(console.log);
+    const userAddress = localStorage.getItem("accountAddress") || "";
+    alchemy.core.getBalance(userAddress, "latest").then((balance: any) => {
+      const stringBalance = balance.toString();
+      const valideBalance = web3.utils.fromWei(stringBalance, "ether");
+
+      setCurrentBalance(valideBalance);
+    });
   }
 
   return (
@@ -91,7 +99,7 @@ export default function AccountCard() {
         </Button>
 
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white float-right">
-          Balance : 39.4$
+          Balance : {currentBalance} MATIC
         </h5>
       </div>
 
