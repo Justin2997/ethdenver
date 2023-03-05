@@ -1,70 +1,39 @@
-# Getting Started with Create React App
+# Frontend
+This is the full front end for the AGIS-GUI.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Prerequisites
+- [Node.js](https://nodejs.org/en/) (v18.x)
 
-## Available Scripts
+You can install it with nvm (Node Version Manager) with the following command:
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+```
+Then install the latest version of node with:
+```bash
+nvm install 18
+```
 
-In the project directory, you can run:
+## Start the application
+Before starting the application be sure to have run `yarn install` to install all the dependencies. Also start the tileserver-gl server see [tileserver-gl/README.md](tileserver-gl/README.md) for more information.
 
-### `npm start`
+Then you can start the application with `yarn start` and it should open a new tab in your browser.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Lbraries use
+- Map : [react-map-gl](https://github.com/visgl/react-map-gl)
+- Query : [react-query](https://react-query-v3.tanstack.com/)
+- State management : [zustand](https://github.com/pmndrs/zustand#typescript-usage)
+- Routing : [react-router](https://github.com/remix-run/react-router)
+- Unit testing : [react-testing-library](https://testing-library.com/docs/react-testing-library/intro/)
+- Styling : [tailwindcss](https://tailwindcss.com/)
+- UI components : [flowbite](https://flowbite.com/docs/getting-started/introduction/)
+- Code formatting : [prettier](https://prettier.io/)
+- Linting : [eslint](https://eslint.org/)
+- End2end testing : [cypress](https://www.cypress.io/)
+- Component testing : [storybook](https://storybook.js.org/)
+- Security Scan : [socket](https://socket.dev/dashboard/org/gh/artik-technologies)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Security scan
+You can join the organisation with this link [socket.dev/dashboard/invitation?organization_id=3962&invitation_token=CG7RhYPz2gJTFyEzHcA1tmLRRltW41gx2KJ5XbXVxS4](socket.dev/dashboard/invitation?organization_id=3962&invitation_token=CG7RhYPz2gJTFyEzHcA1tmLRRltW41gx2KJ5XbXVxS4)
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Storybook
+To start storybook run `yarn storybook` and it should open a new tab in your browser. Get more information one how Storybook work with [https://storybook.js.org/docs/react/get-started/whats-a-story](https://storybook.js.org/docs/react/get-started/whats-a-story).
