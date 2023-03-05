@@ -1,25 +1,33 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button } from "flowbite-react";
-import { Magic } from "magic-sdk";
+import { useHookstate } from "@hookstate/core";
+import { Button, Spinner } from "flowbite-react";
 import React from "react";
+import { useNavigate } from "react-router-dom";
+import { userState } from "store/userState";
+import magic from "utils/magic";
 
 export default function LoginWithMagic() {
+  const user = useHookstate(userState);
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = React.useState(false);
+
   function loginWithConnect() {
-    const magic = new Magic("pk_live_1BBC04D07CC06D70", {
-      network: "goerli",
-    });
+    setIsLoading(true);
 
     magic.wallet
       .connectWithUI()
-      .then(async (res) => {
-        console.log(res);
+      .then(async (accountAddress) => {
+        user.set(accountAddress);
+        localStorage.setItem("accountAddress", accountAddress[0]);
+        navigate("/");
+        setIsLoading(false);
       })
       .catch((err) => console.error(err));
   }
 
   return (
     <Button onClick={() => loginWithConnect()} type="button" className="button">
-      Connect wallet
+      {isLoading ? <Spinner color="info" /> : "Connect wallet"}
     </Button>
   );
 }

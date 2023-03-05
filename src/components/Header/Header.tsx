@@ -1,5 +1,6 @@
 import "./header.css";
 
+import logo from "assets/logo/cryptotacos.png";
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import React from "react";
 
@@ -8,33 +9,21 @@ export const Header = () => (
     <Navbar>
       <React.Fragment key=".0">
         <Navbar.Brand href="https://flowbite.com/">
-          <img
-            alt="Flowbite Logo"
-            className="h-6 mr-3 sm:h-9"
-            src="https://flowbite.com/docs/images/logo.svg"
-          />
+          <img alt="Flowbite Logo" className="h-8 mr-3 sm:h-9" src={logo} />
           <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
-            Flowbite
+            CryptoTacos
           </span>
         </Navbar.Brand>
         <Navbar.Collapse>
           <Navbar.Link active href="/">
             Home
           </Navbar.Link>
+          <Navbar.Link href="/login">Login</Navbar.Link>
           <Navbar.Link href="/dashboard">Dashboard</Navbar.Link>
         </Navbar.Collapse>
 
         <div className="flex gap-3 md:order-2 text-white">
-          <Dropdown
-            inline
-            label={
-              <Avatar
-                alt="User settings"
-                img="https://flowbite.com/docs/images/people/profile-picture-5.jpg"
-                rounded
-              />
-            }
-          >
+          <Dropdown inline label={<Avatar placeholderInitials="Ox" />}>
             <Dropdown.Header>
               <span className="block text-sm">Bonnie Green</span>
             </Dropdown.Header>
