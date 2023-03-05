@@ -35,7 +35,7 @@ export default function Dashboard() {
       category: ["erc20", "internal", "external"] as any,
     });
 
-    setTransactions(res.transfers as any);
+    setTransactions(res.transfers.reverse() as any);
     setIsLoading(false);
     console.log("data", res);
   }
