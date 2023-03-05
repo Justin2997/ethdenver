@@ -3,8 +3,9 @@ import { BanknotesIcon, PrinterIcon } from "@heroicons/react/24/outline";
 import { useHookstate } from "@hookstate/core";
 import SendComponent from "components/SendComponent";
 import { Button, Card, Modal } from "flowbite-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { userState } from "store/userState";
+import alchemy from "utils/alchemy";
 
 export default function AccountCard() {
   const user = useHookstate(userState);
@@ -15,6 +16,14 @@ export default function AccountCard() {
     "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=" +
     userInfo +
     "&choe=UTF-8";
+
+  useEffect(() => {
+    getUserBalance();
+  }, []);
+
+  async function getUserBalance() {
+    alchemy.core.getTokenBalances(userInfo[0]).then(console.log);
+  }
 
   return (
     <Card>
