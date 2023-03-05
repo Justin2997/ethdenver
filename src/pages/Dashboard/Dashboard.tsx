@@ -2,17 +2,19 @@ import { useHookstate } from "@hookstate/core";
 import { Header } from "components/Header/Header";
 import TransactionCard from "components/TransactionCard";
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { userState } from "store/userState";
 
 export default function Dashboard() {
   const user = useHookstate(userState);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const accountAddress = localStorage.getItem("accountAddress");
     if (accountAddress) {
       user.set([accountAddress]);
     } else {
-      window.location.href = "/login";
+      navigate("/login");
     }
   }, []);
 
@@ -26,10 +28,10 @@ export default function Dashboard() {
           <TransactionCard
             chain="polygon"
             address={userInfo[0]}
-            tokenSymbol="MATIC"
+            tokenSymbol="USDC"
             tokenDecimals={18}
             tokenName="Matic"
-            tokenAmount={20.0}
+            tokenAmount={19.4}
           />
         </div>
 
@@ -38,10 +40,10 @@ export default function Dashboard() {
             <TransactionCard
               chain="ethereum"
               address={userInfo[0]}
-              tokenSymbol="ETH"
+              tokenSymbol="USDC"
               tokenDecimals={18}
               tokenName="Ethereum"
-              tokenAmount={0.01}
+              tokenAmount={20}
             />
           </div>
         </div>
