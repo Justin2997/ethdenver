@@ -2,17 +2,19 @@ import { useHookstate } from "@hookstate/core";
 import AccountCard from "components/AccountCard";
 import { Header } from "components/Header/Header";
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { userState } from "store/userState";
 
 export default function PrimaryView() {
   const user = useHookstate(userState);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const accountAddress = localStorage.getItem("accountAddress");
     if (accountAddress) {
       user.set([accountAddress]);
     } else {
-      window.location.href = "/login";
+      navigate("/login");
     }
   }, []);
 

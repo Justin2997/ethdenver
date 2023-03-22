@@ -1,50 +1,69 @@
 import { useHookstate } from "@hookstate/core";
 import { Header } from "components/Header/Header";
 import TransactionCard from "components/TransactionCard";
+import { Spinner } from "flowbite-react";
+import { map } from "leaflet";
 import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { userState } from "store/userState";
+import alchemy from "utils/alchemy";
 
 export default function Dashboard() {
   const user = useHookstate(userState);
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [transactions, setTransactions] = React.useState([]);
 
   useEffect(() => {
     const accountAddress = localStorage.getItem("accountAddress");
     if (accountAddress) {
       user.set([accountAddress]);
     } else {
-      window.location.href = "/login";
+      navigate("/login");
     }
+
+    getTransactionHistory();
   }, []);
 
-  const userInfo = user.get();
+  async function getTransactionHistory() {
+    setIsLoading(true);
+    const accountAddress = localStorage.getItem("accountAddress");
+    const res = await alchemy.core.getAssetTransfers({
+      fromBlock: "0x0",
+      toAddress: accountAddress || "",
+      excludeZeroValue: true as any,
+      category: ["erc20", "internal", "external"] as any,
+    });
+
+    setTransactions(res.transfers.reverse() as any);
+    setIsLoading(false);
+    console.log("data", res);
+  }
+
   return (
     <React.Fragment>
       <div className="wrapper">
         <Header />
-
-        <div style={{ margin: "50px" }}>
-          <TransactionCard
-            chain="polygon"
-            address={userInfo[0]}
-            tokenSymbol="MATIC"
-            tokenDecimals={18}
-            tokenName="Matic"
-            tokenAmount={20.0}
-          />
-        </div>
-
-        <div className="justify-center gap-12">
-          <div style={{ margin: "50px" }}>
-            <TransactionCard
-              chain="ethereum"
-              address={userInfo[0]}
-              tokenSymbol="ETH"
-              tokenDecimals={18}
-              tokenName="Ethereum"
-              tokenAmount={0.01}
-            />
-          </div>
-        </div>
+        {!isLoading ? (
+          <React.Fragment>
+            {transactions.map((transaction: any) => {
+              return (
+                <div key={transaction.hash} style={{ margin: "50px" }}>
+                  <TransactionCard
+                    chain="polygon"
+                    address={transaction.hash}
+                    tokenSymbol={transaction.asset}
+                    tokenDecimals={18}
+                    tokenName={transaction.asset}
+                    tokenAmount={transaction.value}
+                  />
+                </div>
+              );
+            })}
+          </React.Fragment>
+        ) : (
+          <Spinner color="info"></Spinner>
+        )}
       </div>
     </React.Fragment>
   );

@@ -3,18 +3,35 @@ import { BanknotesIcon, PrinterIcon } from "@heroicons/react/24/outline";
 import { useHookstate } from "@hookstate/core";
 import SendComponent from "components/SendComponent";
 import { Button, Card, Modal } from "flowbite-react";
-import React from "react";
+import React, { useEffect } from "react";
 import { userState } from "store/userState";
+import alchemy from "utils/alchemy";
+import { web3 } from "utils/web3";
 
 export default function AccountCard() {
   const user = useHookstate(userState);
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [currentBalance, setCurrentBalance] = React.useState("0");
 
   const userInfo = user.get();
   const url =
     "https://chart.googleapis.com/chart?chs=300x300&cht=qr&chl=" +
     userInfo +
     "&choe=UTF-8";
+
+  useEffect(() => {
+    getUserBalance();
+  }, []);
+
+  async function getUserBalance() {
+    const userAddress = localStorage.getItem("accountAddress") || "";
+    alchemy.core.getBalance(userAddress, "latest").then((balance: any) => {
+      const stringBalance = balance.toString();
+      const valideBalance = web3.utils.fromWei(stringBalance, "ether");
+
+      setCurrentBalance(valideBalance);
+    });
+  }
 
   return (
     <Card>
@@ -82,7 +99,7 @@ export default function AccountCard() {
         </Button>
 
         <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white float-right">
-          Balance : 39.4$
+          Balance : {currentBalance} MATIC
         </h5>
       </div>
 

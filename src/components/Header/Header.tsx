@@ -3,13 +3,16 @@ import "./header.css";
 import logo from "assets/logo/cryptotacos.png";
 import { Avatar, Dropdown, Navbar } from "flowbite-react";
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { magic } from "utils/magic";
 
 export function Header() {
+  const navigate = useNavigate();
+
   async function disconnectWallet() {
     await magic.wallet.disconnect(); // clears user session
     localStorage.removeItem("accountAddress");
-    window.location.href = "/";
+    navigate("/");
   }
 
   return (
@@ -23,11 +26,15 @@ export function Header() {
             </span>
           </Navbar.Brand>
           <Navbar.Collapse>
-            <Navbar.Link active href="/">
+            <Link to="/" className="text-white">
               Home
-            </Navbar.Link>
-            <Navbar.Link href="/login">Login</Navbar.Link>
-            <Navbar.Link href="/dashboard">Dashboard</Navbar.Link>
+            </Link>
+            <Link to="/login" className="text-white">
+              Login
+            </Link>
+            <Link to="/dashboard" className="text-white">
+              Dashboard
+            </Link>
           </Navbar.Collapse>
 
           <div className="flex gap-3 md:order-2 text-white">

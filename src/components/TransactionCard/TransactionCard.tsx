@@ -15,7 +15,10 @@ export default function TransactionCard(props: {
       <h5 className="text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
         🤑 You have received{" "}
         <span style={{ color: "#FFCE55" }}>
-          {props.tokenAmount} {props.tokenSymbol}
+          {props.tokenAmount.toLocaleString(undefined, {
+            minimumFractionDigits: 2,
+          })}{" "}
+          {props.tokenSymbol}
         </span>{" "}
         from <span style={{ color: "#FFCE55" }}>{props.address}</span>
       </h5>
